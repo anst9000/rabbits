@@ -1,4 +1,5 @@
 const asyncHandler = require("express-async-handler")
+const Rabbit = require("../models/rabbitModel")
 
 /**
  * @description   Get all Rabbits
@@ -6,7 +7,9 @@ const asyncHandler = require("express-async-handler")
  * @access        Private
  */
 const getRabbits = asyncHandler(async (req, res) => {
-  res.status(200).json({ message: "Get all Rabbits" })
+  const rabbits = await Rabbit.find()
+
+  res.status(200).json({ rabbits })
 })
 
 /**
@@ -15,9 +18,15 @@ const getRabbits = asyncHandler(async (req, res) => {
  * @access        Private
  */
 const getRabbit = asyncHandler(async (req, res) => {
-  res
-    .status(200)
-    .json({ message: `Get single Rabbit with id ${req.params.id}` })
+  const rabbit = await Rabbit.findById(req.params.id)
+
+  if (!rabbit) {
+    res.status(400)
+
+    throw new Error("Kaninen går inte att hitta")
+  }
+
+  res.status(200).json({ rabbit })
 })
 
 /**
@@ -26,13 +35,32 @@ const getRabbit = asyncHandler(async (req, res) => {
  * @access        Private
  */
 const createRabbit = asyncHandler(async (req, res) => {
-  if (!req.body.text) {
-    res.status(400)
+  const { name, breed, age, description, image } = req.body
 
-    throw new Error("Please add a text field")
+  if (!name) {
+    res.status(400)
+    throw new Error("Lägg till ett namn för kaninen")
   }
 
-  res.status(200).json({ message: "Create Rabbit" })
+  if (!breed) {
+    res.status(400)
+    throw new Error("Lägg till en ras för kaninen")
+  }
+
+  if (!description) {
+    res.status(400)
+    throw new Error("Lägg till en beskrivning för kaninen")
+  }
+
+  const rabbit = await Rabbit.create({
+    name,
+    breed,
+    age: age || 0,
+    description,
+    image: image || "default_image.jpg",
+  })
+
+  res.status(200).json(rabbit)
 })
 
 /**
@@ -41,7 +69,23 @@ const createRabbit = asyncHandler(async (req, res) => {
  * @access        Private
  */
 const updateRabbit = asyncHandler(async (req, res) => {
-  res.status(200).json({ message: `Update Rabbit ${req.params.id}` })
+  const rabbit = await Rabbit.findById(req.params.id)
+
+  if (!rabbit) {
+    res.status(400)
+
+    throw new Error("Kaninen går inte att hitta")
+  }
+
+  const updatedRabbit = await Rabbit.findByIdAndUpdate(
+    req.params.id,
+    req.body,
+    {
+      new: true,
+    }
+  )
+
+  res.status(200).json(updatedRabbit)
 })
 
 /**
@@ -50,7 +94,17 @@ const updateRabbit = asyncHandler(async (req, res) => {
  * @access        Private
  */
 const deleteRabbit = asyncHandler(async (req, res) => {
-  res.status(200).json({ message: `Delete Rabbit ${req.params.id}` })
+  const rabbit = await Rabbit.findById(req.params.id)
+
+  if (!rabbit) {
+    res.status(400)
+
+    throw new Error("Kaninen går inte att hitta")
+  }
+
+  await rabbit.deleteOne()
+
+  res.status(200).json({ id: req.params.id })
 })
 
 module.exports = {
