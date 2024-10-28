@@ -1,0 +1,170 @@
+{
+	"info": {
+		"_postman_id": "6716777e-b323-4646-bbfa-ed68119f94b9",
+		"name": "Rabbits",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17117680"
+	},
+	"item": [
+		{
+			"name": "Get all Rabbits",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/rabbits",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"rabbits"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get single Rabbit",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/rabbits/:id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"rabbits",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "671e950ca4ab853e8b9c249f"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Rabbit",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "name",
+							"value": "Testur",
+							"type": "text"
+						},
+						{
+							"key": "breed",
+							"value": "Belgisk jätte",
+							"type": "text"
+						},
+						{
+							"key": "age",
+							"value": "5",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "Testur ligger gärna under köksbordet, hoppar upp för trappan eller är tillsammans med familjen i vardagsrummet.",
+							"type": "text"
+						},
+						{
+							"key": "image",
+							"value": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/rabbits",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"rabbits"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Rabbit",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Gråben\",\r\n    \"breed\": \"Dvärgvädur\",\r\n    \"age\": 2,\r\n    \"description\": \"Gråben är en riktig toppenkanin! En pigg liten kille med en nyfiken och ibland bestämd personlighet. Han gillar mat, leta godis, att    undersöka saker hemma och att ha koll på sin familj. Han är en lugn kanin, men vaken och nyfiken. Tycker han att något är lite otäckt så talar han om det genom att stampa hårt. Han är lätt att locka på och han kan även komma fram och titta ifall någon som är och hälsar på har med sig något gott till honom, så det är en kavat liten kille. Gråben är snäll i hanteringen och bits inte. Han kan bli upplyft i famnen korta stunder, men han tycker inte om det. När man klipper Gråbens klor behöver man vara två då han annars sprattlar iväg. Gråben har också en jättefin och fluffig päls som man kan behöva kamma/borsta, ett nödvändigt ont som Gråben går med på kortare stunder. Gråben bor gärna med människor i sin närhet då han upplevs mycket social och kontaktsökande.\",\r\n    \"image\": \"gråben.jpg\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/rabbits/:id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"rabbits",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "671e950ca4ab853e8b9c249f"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Rabbit",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/rabbits/:id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"rabbits",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "671e9a1db21b7cff6dd62173"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
